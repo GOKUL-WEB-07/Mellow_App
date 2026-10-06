@@ -1,5 +1,14 @@
 # Verification record
 
+## GitHub Pages deployment fix — October 6, 2026
+
+- Confirmed Pages was serving the source branch root rather than a Vite build.
+- Added a test/build/deploy workflow and a dedicated `/Mellow_App/` build mode.
+- Strict TypeScript compilation, the Pages production build, and all 11 unit tests passed.
+- At 430 × 932 pixels, verified navigation and reloads across the five main tabs under the repository subfolder, loaded room artwork, checked the manifest icon/start/scope paths and scoped service worker, and created/reloaded a journal note offline.
+- No failed HTTP responses or runtime errors were recorded during the Pages browser flow.
+- `scripts/browser-pages.cjs` can run against either the local Pages preview or the hosted repository root in a dedicated test browser.
+
 ## Browser download option — October 6, 2026
 
 - Production build and strict TypeScript compilation passed.

@@ -38,7 +38,7 @@ export function RoomScene({
   return (
     <div className={`room-scene ${large ? "large" : ""}`}>
       <img
-        src="/room.webp"
+        src={`${import.meta.env.BASE_URL}room.webp`}
         alt="A quiet companion drinking tea beside a sunlit window, with a wooden desk, books, plants, and a sleeping cat"
         fetchPriority={large ? "auto" : "high"}
       />

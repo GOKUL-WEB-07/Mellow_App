@@ -105,6 +105,21 @@ Unlocks stay unlocked, even when entries are later deleted or intentions reopene
 
 ## PWA and offline
 
+### GitHub Pages deployment
+
+The repository uses `.github/workflows/deploy-pages.yml` to test, build, and publish the contents of `dist/` on pushes to `main`. GitHub Pages must use **GitHub Actions** as its source rather than serving source files from the branch. This follows [Vite's GitHub Pages deployment guide](https://vite.dev/guide/static-deploy.html#github-pages).
+
+`npm run build:pages` builds for `/Mellow_App/`, including the illustration, icons, manifest, service-worker scope, and cached navigation fallback. Pages uses hash URLs such as `/Mellow_App/#/journal` so direct links and refreshes work on static hosting. Root hosting and normal local development continue to use the standard routes.
+
+To check the repository build locally:
+
+```sh
+npm run build:pages
+npm run preview -- --mode pages
+```
+
+Open `http://127.0.0.1:4173/Mellow_App/`. The public app is at `https://gokul-web-07.github.io/Mellow_App/`.
+
 Use **Download app** in the header or Profile to add Soft Day to your device. When the browser offers a native install prompt, the button opens it; otherwise a dialog explains browser-menu installation, Safari Add to Dock, or iPhone/iPad Add to Home Screen. Both buttons share installation state and stop prompting after the browser confirms installation. An Apple touch icon is included for home-screen shortcuts. Browser behavior follows the [PWA installation guidance](https://web.dev/learn/pwa/installation-prompt/) and [Apple home-screen instructions](https://support.apple.com/en-lamr/guide/iphone/iphea86e5236/ios).
 
 The automatic browser install flow requires the production build on localhost or HTTPS. Run `npm run build` and `npm run preview`; the development server can show guidance but does not register the production service worker.

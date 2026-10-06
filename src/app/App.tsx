@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import {
   BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   NavLink,
@@ -39,6 +40,8 @@ const JournalEditor = lazy(() =>
 );
 const Room = lazy(() => import("../features/room/Room"));
 const Profile = lazy(() => import("../features/profile/Profile"));
+// Pages serves static files without an SPA fallback. Hash routes survive refreshes.
+const AppRouter = import.meta.env.MODE === "pages" ? HashRouter : BrowserRouter;
 const nav = [
   { path: "/today", name: "Today", icon: Sun },
   { path: "/focus", name: "Focus", icon: Timer },
@@ -88,7 +91,16 @@ function Shell() {
   const active = focusService.active();
   return (
     <>
-      <a href="#main" className="skip-link">
+      <a
+        href="#main"
+        className="skip-link"
+        onClick={(event) => {
+          event.preventDefault();
+          const main = document.getElementById("main");
+          main?.focus();
+          main?.scrollIntoView();
+        }}
+      >
         Skip to content
       </a>
       <header className="site-header">
@@ -275,9 +287,9 @@ export default function App() {
   return (
     <InstallProvider>
       <StoreProvider>
-        <BrowserRouter>
+        <AppRouter>
           <Shell />
-        </BrowserRouter>
+        </AppRouter>
       </StoreProvider>
     </InstallProvider>
   );
